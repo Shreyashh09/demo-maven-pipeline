@@ -12,7 +12,9 @@ pipeline {
                 maven 'Maven3' 
             }
             steps {
-                sh 'mvn clean compile'
+                dir('demo-maven-project') { 
+                    sh 'mvn clean compile'
+                }
             }
         }
         stage('Test') {
