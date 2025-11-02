@@ -1,15 +1,28 @@
 pipeline {
-    agent none
-
+    // Top-level agent set to none since you're using stage-level agents
+    agent none 
+    
     stages {
         stage('Compile') {
+            // Stage-level agent
             agent { label 'builder' }
+            
+            // Move tools inside the stage where it's needed
+            tools {
+                maven 'Maven3' 
+            }
             steps {
                 sh 'mvn clean compile'
             }
         }
         stage('Test') {
+            // Stage-level agent
             agent { label 'tester' }
+            
+            // Add tools here if you need Maven on the 'tester' label as well
+            tools {
+                maven 'Maven3' 
+            }
             steps {
                 sh 'mvn test'
             }
