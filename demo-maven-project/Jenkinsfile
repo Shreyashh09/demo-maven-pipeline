@@ -26,7 +26,9 @@ pipeline {
                 maven 'Maven3' 
             }
             steps {
-                sh 'mvn test'
+                dir('demo-maven-project') { 
+                    sh 'mvn test'
+                }
             }
         }
     }
